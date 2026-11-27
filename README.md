@@ -49,3 +49,12 @@ Abre http://localhost:8000 — la API está en `/api/*` y la interfaz en `/`.
 
 - El texto se limpia antes de predecir (`limpiar_texto` en `backend/app/model_service.py`): recorte a `max_chars`, eliminación de URLs y normalización de espacios, igual que en el entrenamiento.
 - El modelo se entrenó con scikit-learn 1.6.1; con versiones nuevas puede aparecer un `InconsistentVersionWarning` (funciona, pero conviene fijar la versión en despliegue).
+
+# Citation
+
+@article{tamayo2026mrbert,
+  title={MrBERT: Modern Multilingual Encoders via Vocabulary, Domain, and Dimensional Adaptation},
+  author={Tamayo, Daniel and Lacunza, I{\~n}aki and Rivera-Hidalgo, Paula and Da Dalt, Severino and Aula-Blasco, Javier and Gonzalez-Agirre, Aitor and Villegas, Marta},
+  journal={arXiv preprint arXiv:2602.21379},
+  year={2026}
+}
