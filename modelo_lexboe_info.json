@@ -1,0 +1,38 @@
+{
+  "dataset": "BSC-LT/LexBOE",
+  "fecha": "2026-11-27 05:04",
+  "modelo": "Linear SVM (C=1)",
+  "hiperparametros": {
+    "C": 1.0,
+    "class_weight": "balanced",
+    "dual": "auto",
+    "fit_intercept": true,
+    "intercept_scaling": 1,
+    "loss": "squared_hinge",
+    "max_iter": 1000,
+    "multi_class": "ovr",
+    "penalty": "l2",
+    "random_state": 42,
+    "tol": 0.0001,
+    "verbose": 0
+  },
+  "clases": [
+    "Administración",
+    "Cultura",
+    "Economía y Empleo",
+    "Educación",
+    "Energía y Medio Ambiente",
+    "Fuerzas de Seguridad del Estado",
+    "Funcionarios y Personal",
+    "Judicial",
+    "Normativas",
+    "Salud",
+    "Transporte",
+    "Vivienda"
+  ],
+  "accuracy_test": 0.9465,
+  "f1_macro_test": 0.8453,
+  "modo_rapido": true,
+  "textos_entrenamiento": 20845,
+  "max_chars": 3000
+}

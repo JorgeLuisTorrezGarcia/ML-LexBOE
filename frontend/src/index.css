@@ -1,0 +1,33 @@
+:root {
+  --jade-50: #effaf5;
+  --jade-100: #d7f2e4;
+  --jade-200: #b0e4cc;
+  --jade-300: #7fd0ae;
+  --jade-400: #4bb58c;
+  --jade-500: #2b9d72;
+  --jade-600: #1f7f5c;
+  --jade-700: #1b664c;
+  --jade-800: #18513e;
+  --jade-900: #144236;
+  --tinta: #12211b;
+  --gris: #5b6b64;
+  --borde: #dbe7e1;
+  --fondo: #f4f8f6;
+  --error: #b42318;
+  --error-bg: #fef3f2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--tinta);
+  background:
+    radial-gradient(1200px 500px at 80% -10%, var(--jade-100), transparent 60%),
+    radial-gradient(900px 400px at -10% 10%, var(--jade-50), transparent 55%),
+    var(--fondo);
+}
