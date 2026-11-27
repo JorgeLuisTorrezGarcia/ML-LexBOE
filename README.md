@@ -4,9 +4,9 @@ API en FastAPI + interfaz web en React para el modelo `modelo_lexboe.joblib` ent
 
 ## Estructura
 
-- `backend/` — API FastAPI (`POST /api/clasificar`, `GET /api/salud`, `GET /api/clases`)
-- `frontend/` — React + Vite
-- `modelo_lexboe.joblib`, `modelo_lexboe_info.json` — modelo e información (en la raíz)
+- `backend/` — API FastAPI (`POST /api/clasificar`, `GET /api/salud`, `GET /api/clases`), con su propio `Dockerfile` y `fly.toml` para Fly.io
+- `frontend/` — React + Vite (se despliega como sitio estático)
+- `modelo_lexboe.joblib`, `modelo_lexboe_info.json` — modelo e información (en la raíz y copias en `backend/` para el despliegue)
 
 ## Backend
 
@@ -20,9 +20,9 @@ Documentación interactiva: http://localhost:8000/docs
 
 Variables de entorno opcionales (`.env`):
 
-- `MODEL_PATH` — ruta al `.joblib` (por defecto `../modelo_lexboe.joblib`)
+- `MODEL_PATH` — ruta al `.joblib` (por defecto `modelo_lexboe.joblib` dentro de `backend/`)
 - `INFO_PATH` — ruta al `.json` de info
-- `CORS_ORIGINS` — orígenes permitidos, separados por coma (por defecto `http://localhost:5173`)
+- `CORS_ORIGINS` — orígenes permitidos, separados por coma (por defecto `http://localhost:5173`; en producción, la URL del frontend desplegado)
 
 ## Frontend
 
@@ -34,16 +34,32 @@ pnpm dev
 
 Abre http://localhost:5173. La URL del API se configura con `VITE_API_URL` (por defecto `http://localhost:8000`).
 
-## Docker
+## Despliegue
 
-La imagen `lexboe-app` contiene el backend, el modelo y el frontend compilado: una sola imagen sirve la API y la web en el puerto 8000.
+Backend y frontend se despliegan por separado.
+
+### Backend en Fly.io
 
 ```bash
-docker build -t lexboe-app .
-docker run -p 8000:8000 lexboe-app
+cd backend
+fly launch        # la primera vez, crea la app y usa el Dockerfile/fly.toml existentes
+fly deploy
 ```
 
-Abre http://localhost:8000 — la API está en `/api/*` y la interfaz en `/`.
+La app queda en `https://<app>.fly.dev`. Antes de desplegar, configura CORS con la URL del frontend:
+
+```bash
+fly secrets set CORS_ORIGINS=https://tu-frontend.vercel.app
+```
+
+### Frontend (estático)
+
+```bash
+cd frontend
+pnpm build
+```
+
+Sube el contenido de `frontend/dist/` a cualquier hosting estático (Vercel, Netlify, GitHub Pages…). Define `VITE_API_URL` con la URL del backend en Fly.io antes de compilar, por ejemplo `VITE_API_URL=https://lexboe-backend.fly.dev`.
 
 ## Notas
 
